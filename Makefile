@@ -1,3 +1,5 @@
+UNAME := #(shell uname)
+
 # Binary and target CPU - add your source files here
 BINNAME = gbit
 BINSRC = main.c test_cpu.c
