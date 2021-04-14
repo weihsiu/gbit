@@ -13,7 +13,7 @@ CURDIR := $(abspath $(dir $(lastword $(MAKEFILE_LIST))))
 
 CFLAGS   := -O2 -Wall -Wextra -g -MMD -I. -fPIC
 CXXFLAGS := -O2 -Wall -Wextra -g -MMD -I. -fPIC
-LDFLAGS  := -Wl,-rpath="$(CURDIR)" -L. -lgbit
+LDFLAGS  := -Wl,-rpath,"$(CURDIR)" -L. -lgbit
 
 LIBOBJS := $(patsubst %.c,$(BDIR)/%.o,$(LIBSRC))
 BINOBJS := $(patsubst %.c,$(BDIR)/%.o,$(patsubst %.cpp,$(BDIR)/%.o,$(BINSRC)))
