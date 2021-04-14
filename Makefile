@@ -4,7 +4,7 @@ BINSRC = main.c test_cpu.c
 
 # Test framework (shared library)
 LIBNAME = libgbit.so
-LIBSRC = lib/tester.c lib/inputstate.c lib/ref_cpu.c lib/disassembler.c
+LIBSRC = lib/tester.c lib/inputstate.c lib/ref_cpu.c lib/disassembler.c lib/tester_jna.c
 
 # Build directory - stores intermediate object files
 BDIR := build
