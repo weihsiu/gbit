@@ -1,11 +1,18 @@
-UNAME := #(shell uname)
+UNAME := $(shell uname)
 
 # Binary and target CPU - add your source files here
 BINNAME = gbit
 BINSRC = main.c test_cpu.c
 
 # Test framework (shared library)
+ifeq ($(UNAME), Linux)
 LIBNAME = libgbit.so
+LIBTYPE := -shared
+endif
+ifeq ($(UNAME), Darwin)
+LIBNAME = libgbit.dylib
+LIBTYPE := -dynamiclib
+endif
 LIBSRC = lib/tester.c lib/inputstate.c lib/ref_cpu.c lib/disassembler.c lib/tester_jna.c
 
 # Build directory - stores intermediate object files
@@ -45,7 +52,7 @@ $(BDIR)/%.o: %.cpp | $(BDIR)
 	$(CXX) $(CXXFLAGS) -c -o $@ $<
 $(LIBNAME): $(LIBOBJS) | $(BDIR)
 	$(LOG) [LINK]
-	$(CC) $^ -o $@ -shared
+	$(CC) $^ -o $@ $(LIBTYPE)
 $(BINNAME): $(BINOBJS) | $(LIBNAME) $(BDIR)
 	$(LOG) [LINK]
 	$(CXX) $^ -o $@ $(LDFLAGS)
